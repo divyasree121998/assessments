@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>REGISTRATION FORM</title>
+<style type="text/css">
+	body{background-color:white}
+</style>
+<script type="text/javascript">
+
+function validate() {
+var pwd= document.getElementById('pwd').value;
+var pwd1=document.getElementById('pwd1').value
+if(pwd != pwd1)
+{
+alert('invalid password');
+return false;
+}
+}
+function charat(e) {
+
+			if(!((e.which>=65 && e.which<=90) || (e.which>=97 && e.which<=122)))
+			{
+				e.preventDefault();
+			}
+
+		}
+
+function d() {
+  var c = document.forms["myF"]["dob"].value;
+  if (c == "") {
+    alert("date of birth is mandatory");
+    return false;
+  }
+}
+</script>
+</head>
+<body>
+<center>
+	
+<h1 style="color: green">Registration Form</h1>
+<div style="height: 500px;width: 500px; background-color:#35e8a4">	
+<table align="center" width="50%"><br>
+    <form name="myForm" action="/action_page.php" onsubmit="return uname()" method="post">
+    <tr><td><input type="text" placeholder="Name" onkeypress="charat(event)"></td></tr></form>
+    <tr><td><input type="password"  id ="pwd" placeholder="password"></td></tr>
+    <tr><td><input type="password"  id ="pwd1" placeholder="confirm password"></td></tr>
+    <form name="myF" onsubmit="return d()" method="post">
+    <tr><td><input type="date"  id="dob" placeholder="DOB" max="2002-07-20"></td></tr><br><br><br>
+    <tr><td><label align ="left"></label>
+    <select  name ="qual"id ="dropdown">
+    	<option>qualification</option>
+    	<optgroup label ="graduation">
+    		<option value="ece">ece</option>
+    		<option value="cse">cse</option></optgroup>
+    		<optgroup label="post graduation">
+    			<option>arts</option>
+    			<option>mtech cse</option>
+    		</optgroup>
+    </select>
+    <tr><th><input type="submit" value="submit" onclick="return validate()"></th></tr><br><br></form>
+
+</table>
+</div>
+</center>
+</body>
+</html>
