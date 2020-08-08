@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script type="text/javascript">
+
+function dobValidate() {
+var d=new Date();
+var yy=d.getFullYear();
+var mon=d.getMonth()+1;
+var dd=d.getDate();
+
+if(mon<10){
+mon='0'+mon;
+}
+if(dd<10){
+dd='0'+dd;
+}
+document.getElementById('dob').min=yy+'-'+mon+'-'+dd;
+
+}
+
+</script>
+
+
+</head>
+
+<body>
+<input type="date" id="dob" onclick="dobValidate()">
+</form>
+</body>
+
+</html>

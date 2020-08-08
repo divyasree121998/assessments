@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+function filldd()
+{
+	state=['AP','TN','Kerala','Karnataka']
+
+	var dropdown = document.getElementById("dd");
+	for(i=0;i<state.length;i++)
+	{
+		var element =document.createElement('option');
+		element.text=state[i];
+		dropdown.add(element,i+1)
+	}
+}
+
+
+</script>	
+</head>
+<body onload="filldd()">
+	<select id="dd">
+		<option> select state</option>
+	</select>
+
+</body>
+</html>
