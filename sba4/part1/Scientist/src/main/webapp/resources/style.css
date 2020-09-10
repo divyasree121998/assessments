@@ -1,0 +1,16 @@
+body {
+  background-color:coral ;
+  align:center;
+}
+h1 {
+  color: black;
+}
+p {
+  color: black;
+}
+div {
+	color: black;
+	height: 500px;
+	width: 400px; 
+	background-color:#e1bfe3
+}
