@@ -1,0 +1,146 @@
+--------------------mypage.html
+
+<div>
+  <br>
+    THIS IS A DIV TAG
+    <br>
+<p *ngIf="isVisible"> THIS IS A P TAG</p> 
+<br>
+<p [style.background-color]="'green'"> this is p tag from mypage</p>
+<br>
+<p [style.background-color]="isImp ? 'green':'red'"> this is p tag from mypage</p>
+<button (click)="size=size+5"> + </button>
+
+<button (click)="size=size-5"> - </button>
+
+
+<p [ngStyle]="{'font-size':size+'px' , 'background-color':'pink'}"> my styles should be applied here </p>
+<br>
+using function
+ PhoneNumber:<input type="text">
+
+ <input type="submit" (click)="changeStatus()" value="add altenate number">
+ <br>
+ <p *ngIf="isVisible">
+Alternate number:<input type="text">
+</p>
+<!-- not condition -->
+<div *ngIf="!isVisible">
+is visible is set to false
+</div>
+<!-- and operator -->
+<div *ngIf="a && b">
+div tag for and condition
+</div>
+<!-- if else -->
+<div *ngIf="isVisible; else elseTemplate">
+   display true
+   <p> child1</p>
+<p> child2 
+
+    <div> child inside child</div>
+<p> child3</p>
+ 
+</div>
+<ng-template #elseTemplate>
+    else display false
+</ng-template>
+LIST OF CARS
+<div *ngFor="let car of cars">
+<p> {{car}} </p>
+</div>
+<br>
+BELOW IS THE UNORDERED LIST
+<br>
+<ul *ngFor="let car of cars">
+<li> {{car}}   </li>   
+</ul>
+<br>
+<select>
+    <option *ngFor="let car of cars">{{car}} </option>
+</select>
+<br>
+<div>
+    <select [(ngModel)]="selectedState" (change)="disp()">  
+        <option [ngValue]="selectedState" disabled> select state</option>
+        <option *ngFor= "let state of states">
+         {{state}}
+        </option>
+    </select>
+</div>
+
+<div *ngIf="fillCities">
+
+    <select >
+        <option *ngFor="let city of fillCities">
+         {{city}}
+        </option>
+    </select>
+</div>
+
+</div>
+---------------------------------app.component.ts
+
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './mypage.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+ isVisible:boolean=true;
+ 
+ a=true;
+ b=true;
+
+ changeStatus():void
+ {
+  if( this.isVisible)
+  this.isVisible=false;
+  else
+  this.isVisible=true;
+   
+ }
+ cars=['Maruthi Suzuki','Renault Nissan','BMW','Ford','skoda'];
+ 
+ states=['AP','TN','KARNATAKA'];
+ cities=[["Guntur","vijayawada","kadapa"],["Chennai","Coimbatore","Trichy"],["Bijapur","Banglore","Hubli"]];
+
+ selectedState;
+ fillCities:any[];
+
+ disp(){
+  let idx= this.states.indexOf(this.selectedState);
+  this.fillCities=this.cities[idx];
+ }
+ isImp=true;
+ size=50;
+}
+-----------------------app.module.ts
+
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { FormsModule,NgModel } from '@angular/forms';
+import { MycompComponent } from './mycomp/mycomp.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    MycompComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,FormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
