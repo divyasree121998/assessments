@@ -1,1 +1,876 @@
 
+> use dxcfs
+switched to db dxcfs
+> show collections
+> use dxcfs
+switched to db dxcfs
+> db
+dxcfs
+> db.createCollection("doctors")
+{ "ok" : 1 }
+> db.doctors.drop()
+true
+> db.doctors.insert(
+... {
+... "name":"tina",
+... "born":"1998"
+... }
+... )
+WriteResult({ "nInserted" : 1 })
+> show collections
+doctors
+> db.doctors.find()
+{ "_id" : ObjectId("5f683a883035cbc443e9f084"), "name" : "tina", "born" : "1998" }
+> db.doctors.find().pretty()
+{
+        "_id" : ObjectId("5f683a883035cbc443e9f084"),
+        "name" : "tina",
+        "born" : "1998"
+}
+> db.doctors.insert(
+... {
+... "name":"john",
+... "born":"1992"
+... }
+... )
+WriteResult({ "nInserted" : 1 })
+> db.doctors.find()
+{ "_id" : ObjectId("5f683a883035cbc443e9f084"), "name" : "tina", "born" : "1998" }
+{ "_id" : ObjectId("5f683aea3035cbc443e9f085"), "name" : "john", "born" : "1992" }
+> db.doctors.insert(
+... {
+... "name":"dean",
+... "born":"1994",
+... "speciality":"ortho"
+... }
+... )
+WriteResult({ "nInserted" : 1 })
+> db.doctors.insert(
+... {
+... "name":"cena",
+... "born":"1993",
+... "speciality":"ortho"
+... }
+... )
+WriteResult({ "nInserted" : 1 })
+> db.doctors.find(
+... {"born":"1994"}
+... ).pretty()
+{
+        "_id" : ObjectId("5f683b3d3035cbc443e9f086"),
+        "name" : "dean",
+        "born" : "1994",
+        "speciality" : "ortho"
+}
+> db.doctors.find(
+... {"speciality":"ortho"}
+... ).pretty()
+{
+        "_id" : ObjectId("5f683b3d3035cbc443e9f086"),
+        "name" : "dean",
+        "born" : "1994",
+        "speciality" : "ortho"
+}
+{
+        "_id" : ObjectId("5f683b7b3035cbc443e9f087"),
+        "name" : "cena",
+        "born" : "1993",
+        "speciality" : "ortho"
+}
+-------------------------------
+db.doctors.insert(
+... {
+... "name":"bean",
+... "born":" 1990",
+... "speciality":"neuro",
+... "phone":["998877","665588","445577"]
+... }
+... )
+WriteResult({ "nInserted" : 1 })
+> db.doctors.find({"name":"bean"}).pretty();
+{
+        "_id" : ObjectId("5f6843bf3035cbc443e9f088"),
+        "name" : "bean",
+        "born" : " 1990",
+        "speciality" : "neuro",
+        "phone" : [
+                "998877",
+                "665588",
+                "445577"
+        ]
+}
+//greater than
+
+> db.doctors.find(
+... {"born": {$gt:"1995"} }
+... )
+{ "_id" : ObjectId("5f683a883035cbc443e9f084"), "name" : "tina", "born" : "1998" }
+
+//less than
+
+> db.doctors.find(
+... {"born": {$lt:"1995"} }
+... )
+{ "_id" : ObjectId("5f683aea3035cbc443e9f085"), "name" : "john", "born" : "1992" }
+{ "_id" : ObjectId("5f683b3d3035cbc443e9f086"), "name" : "dean", "born" : "1994", "speciality" : "ortho" }
+{ "_id" : ObjectId("5f683b7b3035cbc443e9f087"), "name" : "cena", "born" : "1993", "speciality" : "ortho" }
+{ "_id" : ObjectId("5f6843bf3035cbc443e9f088"), "name" : "bean", "born" : " 1990", "speciality" : "neuro", "phone" : [ "998877", "665588", "445577" ] }
+> db.doctors.find(
+... {"born": {$lt:"1994"} }
+... ).pretty()
+{
+        "_id" : ObjectId("5f683aea3035cbc443e9f085"),
+        "name" : "john",
+        "born" : "1992"
+}
+{
+        "_id" : ObjectId("5f683b7b3035cbc443e9f087"),
+        "name" : "cena",
+        "born" : "1993",
+        "speciality" : "ortho"
+}
+{
+        "_id" : ObjectId("5f6843bf3035cbc443e9f088"),
+        "name" : "bean",
+        "born" : " 1990",
+        "speciality" : "neuro",
+        "phone" : [
+                "998877",
+                "665588",
+                "445577"
+        ]
+}
+
+//less than or equal
+
+> db.doctors.find(
+... {"born": {$lte:"1994"} }
+... ).pretty()
+{
+        "_id" : ObjectId("5f683aea3035cbc443e9f085"),
+        "name" : "john",
+        "born" : "1992"
+}
+{
+        "_id" : ObjectId("5f683b3d3035cbc443e9f086"),
+        "name" : "dean",
+        "born" : "1994",
+        "speciality" : "ortho"
+}
+{
+        "_id" : ObjectId("5f683b7b3035cbc443e9f087"),
+        "name" : "cena",
+        "born" : "1993",
+        "speciality" : "ortho"
+}
+{
+        "_id" : ObjectId("5f6843bf3035cbc443e9f088"),
+        "name" : "bean",
+        "born" : " 1990",
+        "speciality" : "neuro",
+        "phone" : [
+                "998877",
+                "665588",
+                "445577"
+        ]
+}
+//not equal
+
+> db.doctors.find(
+... {"born": {$ne:"1994"} }
+... ).pretty()
+{
+        "_id" : ObjectId("5f683a883035cbc443e9f084"),
+        "name" : "tina",
+        "born" : "1998"
+}
+{
+        "_id" : ObjectId("5f683aea3035cbc443e9f085"),
+        "name" : "john",
+        "born" : "1992"
+}
+{
+        "_id" : ObjectId("5f683b7b3035cbc443e9f087"),
+        "name" : "cena",
+        "born" : "1993",
+        "speciality" : "ortho"
+}
+{
+        "_id" : ObjectId("5f6843bf3035cbc443e9f088"),
+        "name" : "bean",
+        "born" : " 1990",
+        "speciality" : "neuro",
+        "phone" : [
+                "998877",
+                "665588",
+                "445577"
+        ]
+}
+//not in values
+
+> db.doctors.find(
+... {"born": {$nin:["1994" , "1993","2000"]} }
+... ).pretty();
+{
+        "_id" : ObjectId("5f683a883035cbc443e9f084"),
+        "name" : "tina",
+        "born" : "1998"
+}
+{
+        "_id" : ObjectId("5f683aea3035cbc443e9f085"),
+        "name" : "john",
+        "born" : "1992"
+}
+{
+        "_id" : ObjectId("5f6843bf3035cbc443e9f088"),
+        "name" : "bean",
+        "born" : " 1990",
+        "speciality" : "neuro",
+        "phone" : [
+                "998877",
+                "665588",
+                "445577"
+        ]
+}
+
+//in operator
+
+> db.doctors.find(
+... {"born": {$in:["1994" , "1993","2000"]} }
+... ).pretty()
+{
+        "_id" : ObjectId("5f683b3d3035cbc443e9f086"),
+        "name" : "dean",
+        "born" : "1994",
+        "speciality" : "ortho"
+}
+{
+        "_id" : ObjectId("5f683b7b3035cbc443e9f087"),
+        "name" : "cena",
+        "born" : "1993",
+        "speciality" : "ortho"
+}
+
+//and operator
+
+> db.doctors.find(
+... {
+... born:"1993",
+... name:"cena"
+... }
+... ).pretty();
+{
+        "_id" : ObjectId("5f683b7b3035cbc443e9f087"),
+        "name" : "cena",
+        "born" : "1993",
+        "speciality" : "ortho"
+}
+
+//or operator
+
+> db.doctors.find(
+... {
+... $or:[
+... {born:"2000"},
+... {name:"bean"}
+... ]
+... }
+... ).pretty()
+{
+        "_id" : ObjectId("5f6843bf3035cbc443e9f088"),
+        "name" : "bean",
+        "born" : " 1990",
+        "speciality" : "neuro",
+        "phone" : [
+                "998877",
+                "665588",
+                "445577"
+        ]
+}
+------------------------update functions
+db.doctors.update(
+... {
+... name:"cena"
+... },
+... {
+... $set:{name:"john cena"}
+... }
+... )
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.doctors.update(
+... {
+... name:"dean"
+... },
+... {
+... $set:{name:"dean new"}
+... }
+... )
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.doctors.update(
+... {
+... name:"dean new"
+... },
+... {
+... $set:{name:"dean new testm"}
+... },{multi:true}
+... )
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.doctors.update(
+... {
+... name:"dean new testm"
+... },
+... {
+... $set:{name:"dean"}
+... }
+... )
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.doctors.update(
+... {name:"dean"},
+... {$unset:{born:"2000"}}
+... )
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.doctors.find(
+... {
+... name:"dean"
+... }
+... ).pretty()
+{
+        "_id" : ObjectId("5f683b3d3035cbc443e9f086"),
+        "name" : "dean",
+        "speciality" : "ortho"
+}
+>
+> db.doctors.update(
+... {name:"dean"},
+... {$set:{born:"2000"}}
+... )
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.doctors.find()
+{ "_id" : ObjectId("5f683a883035cbc443e9f084"), "name" : "tina", "born" : "1998" }
+{ "_id" : ObjectId("5f683aea3035cbc443e9f085"), "name" : "john", "born" : "1992" }
+{ "_id" : ObjectId("5f683b3d3035cbc443e9f086"), "name" : "dean", "speciality" : "ortho", "born" : "2000" }
+{ "_id" : ObjectId("5f683b7b3035cbc443e9f087"), "name" : "john cena", "born" : "1993", "speciality" : "ortho" }
+{ "_id" : ObjectId("5f6843bf3035cbc443e9f088"), "name" : "bean", "born" : " 1990", "speciality" : "neuro", "phone" : [ "998877", "665588", "445577" ] }
+> db.doctors.find().pretty();
+{
+        "_id" : ObjectId("5f683a883035cbc443e9f084"),
+        "name" : "tina",
+        "born" : "1998"
+}
+{
+        "_id" : ObjectId("5f683aea3035cbc443e9f085"),
+        "name" : "john",
+        "born" : "1992"
+}
+{
+        "_id" : ObjectId("5f683b3d3035cbc443e9f086"),
+        "name" : "dean",
+        "speciality" : "ortho",
+        "born" : "2000"
+}
+{
+        "_id" : ObjectId("5f683b7b3035cbc443e9f087"),
+        "name" : "john cena",
+        "born" : "1993",
+        "speciality" : "ortho"
+}
+{
+        "_id" : ObjectId("5f6843bf3035cbc443e9f088"),
+        "name" : "bean",
+        "born" : " 1990",
+        "speciality" : "neuro",
+        "phone" : [
+                "998877",
+                "665588",
+                "445577"
+        ]
+}
+> db.doctors.remove(
+... {name:"dean"}
+... );
+WriteResult({ "nRemoved" : 1 })
+> db.doctors.find().pretty();
+{
+        "_id" : ObjectId("5f683a883035cbc443e9f084"),
+        "name" : "tina",
+        "born" : "1998"
+}
+{
+        "_id" : ObjectId("5f683aea3035cbc443e9f085"),
+        "name" : "john",
+        "born" : "1992"
+}
+{
+        "_id" : ObjectId("5f683b7b3035cbc443e9f087"),
+        "name" : "john cena",
+        "born" : "1993",
+        "speciality" : "ortho"
+}
+{
+        "_id" : ObjectId("5f6843bf3035cbc443e9f088"),
+        "name" : "bean",
+        "born" : " 1990",
+        "speciality" : "neuro",
+        "phone" : [
+                "998877",
+                "665588",
+                "445577"
+        ]
+}
+> db.doctors.insert(
+... [
+... {name:"bean new"},
+... {name:"bean new"}
+... ]
+... )
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 2,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.doctors.remove(
+... {name:"bean new"}
+... );
+WriteResult({ "nRemoved" : 2 })
+> db.doctors.insert(
+... [
+... {name:"bean new"},
+... {name:"bean new"}
+... ]
+... )
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 2,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.doctors.remove(
+... {name:"bean new"},1
+... );
+WriteResult({ "nRemoved" : 1 })
+> db.doctors.insert(
+... [
+... {name:"bean new"},
+... {name:"bean new"}
+... ]
+... )
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 2,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.doctors.remove(
+... {name:"bean new"},1
+... );
+WriteResult({ "nRemoved" : 1 })
+> db.doctors.remove({});
+WriteResult({ "nRemoved" : 6 })
+> db.doctors.insert(
+... [
+... {
+... "name":"bean",
+... "doc_id":"1",
+... "born":"2000",
+... "age":"20"
+... },
+...
+... {
+... "name":"dean",
+... "doc_id":"2",
+... "born":"1998",
+... "age":"22"
+... },
+...
+... {
+... "name":"mean",
+... "doc_id":"3",
+... "born":"1999",
+... "age":"21"
+... }
+... ]
+... )
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 3,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.doctors.find().pretty();
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f08f"),
+        "name" : "bean",
+        "doc_id" : "1",
+        "born" : "2000",
+        "age" : "20"
+}
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f090"),
+        "name" : "dean",
+        "doc_id" : "2",
+        "born" : "1998",
+        "age" : "22"
+}
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f091"),
+        "name" : "mean",
+        "doc_id" : "3",
+        "born" : "1999",
+        "age" : "21"
+}
+> select doc_id from doctors;
+uncaught exception: SyntaxError: unexpected token: identifier :
+@(shell):1:7
+> db.doctors.find(
+... {}
+... {"doc_id":1}).pretty();
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):3:0
+> db.doctors.find(
+... {},
+... {"doc_id":1}
+... ).pretty();
+{ "_id" : ObjectId("5f6855543035cbc443e9f08f"), "doc_id" : "1" }
+{ "_id" : ObjectId("5f6855543035cbc443e9f090"), "doc_id" : "2" }
+{ "_id" : ObjectId("5f6855543035cbc443e9f091"), "doc_id" : "3" }
+> db.doctors.find(
+... {},
+... {_id:0,"doc_id":1}
+... ).pretty();
+{ "doc_id" : "1" }
+{ "doc_id" : "2" }
+{ "doc_id" : "3" }
+> db.doctors.findOne();
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f08f"),
+        "name" : "bean",
+        "doc_id" : "1",
+        "born" : "2000",
+        "age" : "20"
+}
+> db.doctors.findOne(
+... {},
+... {_id:0,"doc_id":1}
+... );
+{ "doc_id" : "1" }
+> db.doctors.find().limit(2).pretty();
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f08f"),
+        "name" : "bean",
+        "doc_id" : "1",
+        "born" : "2000",
+        "age" : "20"
+}
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f090"),
+        "name" : "dean",
+        "doc_id" : "2",
+        "born" : "1998",
+        "age" : "22"
+}
+> db.doctors.find().pretty();
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f08f"),
+        "name" : "bean",
+        "doc_id" : "1",
+        "born" : "2000",
+        "age" : "20"
+}
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f090"),
+        "name" : "dean",
+        "doc_id" : "2",
+        "born" : "1998",
+        "age" : "22"
+}
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f091"),
+        "name" : "mean",
+        "doc_id" : "3",
+        "born" : "1999",
+        "age" : "21"
+}
+> db.doctors.find().skip(2).pretty();
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f091"),
+        "name" : "mean",
+        "doc_id" : "3",
+        "born" : "1999",
+        "age" : "21"
+}
+> db.doctors.find().sort({doc_id:1}).pretty();
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f08f"),
+        "name" : "bean",
+        "doc_id" : "1",
+        "born" : "2000",
+        "age" : "20"
+}
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f090"),
+        "name" : "dean",
+        "doc_id" : "2",
+        "born" : "1998",
+        "age" : "22"
+}
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f091"),
+        "name" : "mean",
+        "doc_id" : "3",
+        "born" : "1999",
+        "age" : "21"
+}
+> db.doctors.find().sort({doc_id:-1}).pretty();
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f091"),
+        "name" : "mean",
+        "doc_id" : "3",
+        "born" : "1999",
+        "age" : "21"
+}
+> db.doctors.find().sort({doc_id:-1}).pretty();
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f091"),
+        "name" : "mean",
+        "doc_id" : "3",
+        "born" : "1999",
+        "age" : "21"
+}
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f090"),
+        "name" : "dean",
+        "doc_id" : "2",
+        "born" : "1998",
+        "age" : "22"
+}
+{
+        "_id" : ObjectId("5f6855543035cbc443e9f08f"),
+        "name" : "bean",
+        "doc_id" : "1",
+        "born" : "2000",
+        "age" : "20"
+}
+> db.doctors.find().count();
+3
+---------------------------------
+students
+
+ db.students.insert(
+... [
+... {
+... rno:1,
+... sname:'raj',
+... gender:'male',
+... sem:5,
+... marks:90
+... },
+...
+... {
+... rno:2,
+... sname:'raja',
+... gender:'male',
+... sem:5,
+... marks:80
+... },
+...
+... {
+... rno:3,
+... sname:'rajni',
+... gender:'female',
+... sem:7,
+... marks:77
+... },
+... {
+... rno:4,
+... sname:'rajeshwari',
+... gender:'female',
+... sem:1,
+... marks:88
+... },
+... {
+... rno:4,
+... sname:'rajeshwari',
+... gender:'female',
+... sem:1,
+... marks:88
+... },
+... {
+... rno:5,
+... sname:'raja',
+... gender:'male',
+... sem:1,
+... marks:70
+... }
+... ]
+... )
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 6,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.students.aggregate[
+...
+... )
+uncaught exception: SyntaxError: expected expression, got ')' :
+@(shell):3:0
+> db.students.aggregate(
+... [
+... {$group:{_id:"$gender"}}
+... ])
+{ "_id" : "male" }
+{ "_id" : "female" }
+> db.students.aggregate(
+... [
+... {$group:{_id:"$gender"}}
+... ]
+... )
+{ "_id" : "female" }
+{ "_id" : "male" }
+> db.students.aggregate(
+... [
+... {$group:{_id:"$gender",
+... sum:{$sum:$marks}
+... }}])
+uncaught exception: ReferenceError: $marks is not defined :
+@(shell):4:6
+> db.students.aggregate( [ {$group:{_id:"$gender", sum:{$sum:"$marks"} }}])
+{ "_id" : "male", "sum" : 240 }
+{ "_id" : "female", "sum" : 253 }
+> db.students.aggregate(
+... [
+... {$group:{_id:"$gender",
+... anything:{$sum:1}
+... }}
+... ]
+... )
+{ "_id" : "male", "anything" : 3 }
+{ "_id" : "female", "anything" : 3 }
+> db.students.aggregate(
+... [
+... {$group:{_id:"$gender",
+... average:{$avg:"$marks"}
+... }}
+... ]
+... )
+{ "_id" : "male", "average" : 80 }
+{ "_id" : "female", "average" : 84.33333333333333 }
+> db.students.aggregrate
+dxcfs.students.aggregrate
+> ([
+... {$group:{id:"$gender",
+... )
+... ])
+uncaught exception: SyntaxError: expected property name, got ')' :
+@(shell):3:0
+> db.students.aggregate(
+... [
+... {$group:{_id:"$gender",
+... heighest:{$max:"$marks"}
+... }}
+... ]
+... )
+{ "_id" : "male", "heighest" : 90 }
+{ "_id" : "female", "heighest" : 88 }
+> db.students.aggregate(
+... [
+... {
+... $group:
+... {
+... _id:"$gender",
+... heighest:{$max:"$marks"}
+... }
+... },
+... {
+... $match:{"heighest":{$gt:88 }
+... }}
+... ]
+... )
+{ "_id" : "male", "heighest" : 90 }
+> db.students.aggregate(
+... [
+... {
+... $group:
+... {
+... _id:"$gender",
+... heighest:{$max:"$marks"}
+... }
+... },
+... {
+... $match:{"heighest":{$gte:88 }
+... }}
+... ]
+... )
+{ "_id" : "male", "heighest" : 90 }
+{ "_id" : "female", "heighest" : 88 }
+> db.students.aggregate(
+... [
+... {
+... $group:
+... {
+... _id:"$gender",
+... heighest:{$max:"$marks"}}
+... },
+... $match:{"heighest":{$gte:80}}}])
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):9:6
+> db.students.aggregate( [ { $group: { _id:"$gender", heighest:{$max:"$marks"}} }, {$match:{"heighest":{$gte:80}}}])
+{ "_id" : "male", "heighest" : 90 }
+{ "_id" : "female", "heighest" : 88 }
+> db.author.insert(
+... {
+... name:"raj",
+... phone:["888","999"],
+... address:[
+... {
+... "city":"bang" ,
+... "state":"kar"
+... },
+... {
+... "city":"mum" ,
+... "state":"maha"
+... }
+... ]
+... }
+... );
+WriteResult({ "nInserted" : 1 })
+> db.author.find().pretty();
+{
+        "_id" : ObjectId("5f68766c3035cbc443e9f098"),
+        "name" : "raj",
+        "phone" : [
+                "888",
+                "999"
+        ],
+        "address" : [
+                {
+                        "city" : "bang",
+                        "state" : "kar"
+                },
+                {
+                        "city" : "mum",
+                        "state" : "maha"
+                }
+        ]
+}
