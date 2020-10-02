@@ -1,0 +1,35 @@
+
+
+body {
+	background-image:url("../img/pic4.jpg");
+	background-repeat: no-repeat;
+	background-size: 1280px 577px;
+}
+
+#logo {
+	font-size:40px;
+	color:#bdf272;
+}
+
+
+
+#hd
+{
+	font-size:30px;
+	float:right;
+	margin-top:30px;
+	margin-right:10px;
+	color:white;
+}
+
+
+#fm
+{
+	float:right;
+	margin-top:150px;
+	margin-right:-400px;
+	color:white;
+}
+
+
+

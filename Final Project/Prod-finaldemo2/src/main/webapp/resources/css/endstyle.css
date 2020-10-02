@@ -1,0 +1,26 @@
+
+
+body {
+	background-image:url("../img/byeee.jpg");
+	background-repeat: no-repeat;
+	background-size: 1280px 570px;
+}
+
+#logo {
+	font-size:40px;
+	color:#4c0dbf;
+	float:right;
+	margin-top:-100px;
+}
+
+
+
+#hd {
+	color:white;	
+	font-size:20px;
+	margin-top:200px;
+}
+
+
+
+

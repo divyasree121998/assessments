@@ -1,0 +1,58 @@
+
+
+body {
+	background-image:url("../img/wlcm.jpg");
+	background-repeat: no-repeat;
+	background-size: 1280px 590px;
+}
+
+#logo {
+	font-size:40px;
+	color:#4c0dbf;
+}
+
+
+#shopnow {
+	float: right;
+	margin-right:100px;
+	margin-top: 220px;
+}
+
+#hd {
+	float:right;
+	margin-right:30px;
+	color:white;	
+	font-size:57px;
+	margin-top:-90px;
+}
+
+#ashop
+{
+	
+	float:right;
+	margin-right:200px;
+	color:white;	
+}
+
+
+#ushop
+{
+
+	float:right;
+	margin-top:70px;
+	margin-right:-75px;
+	color:white;
+}
+
+
+#tl13
+{
+	font-size:40px;
+	float:right;
+	margin-top:140px;
+	margin-right:-470px;
+	color:#105209;	
+}
+
+
+

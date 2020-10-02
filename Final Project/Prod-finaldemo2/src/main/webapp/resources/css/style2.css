@@ -1,0 +1,35 @@
+
+
+body {
+	background-image:url("../img/pic11.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#logo {
+	font-size:40px;
+	color:#bdf272;
+}
+
+
+#shopnow {
+	float: right;
+	margin-right:-355px;
+	margin-top: 220px;
+}
+
+
+#tl2
+{
+	font-size:40px;
+	float:right;
+	margin-top:-180px;
+	margin-right:-10px;
+	color:white;
+}
+
+
+
+
+
+

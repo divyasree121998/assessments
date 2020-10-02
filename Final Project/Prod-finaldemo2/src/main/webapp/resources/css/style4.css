@@ -1,0 +1,35 @@
+
+
+body {
+	background-image:url("../img/pic3.jpg");
+	background-repeat: no-repeat;
+	background-size: 1300px 577px;
+}
+
+#logo {
+	font-size:40px;
+	color:#bdf272;
+}
+
+
+#shopnow {
+	float: right;
+	margin-right:-355px;
+	margin-top: 220px;
+}
+
+
+#hd
+{
+	font-size:40px;
+
+	margin-top:80px;
+	
+	color:white;
+}
+
+
+
+
+
+

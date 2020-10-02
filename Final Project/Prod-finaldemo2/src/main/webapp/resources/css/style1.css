@@ -1,0 +1,57 @@
+
+
+body {
+	background-image:url("../img/pic17.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#logo {
+	font-size:40px;
+	color:#4c0dbf;
+}
+
+
+#shopnow {
+	float: right;
+	margin-right:-355px;
+	margin-top: 220px;
+}
+
+#hd {
+	margin-left:620px;
+	color:#ad177b;	
+	font-size:57px;
+	margin-top:-177px;
+}
+
+#tl1
+{
+	font-size:40px;
+	float:right;
+	margin-right:400px;
+	color:#105209;	
+}
+
+
+#tl12
+{
+	font-size:40px;
+	float:right;
+	margin-top:70px;
+	margin-right:-300px;
+	color:#4c0dbf;
+}
+
+
+#tl13
+{
+	font-size:40px;
+	float:right;
+	margin-top:140px;
+	margin-right:-470px;
+	color:#105209;	
+}
+
+
+

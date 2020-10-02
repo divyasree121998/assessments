@@ -1,0 +1,47 @@
+
+
+body {
+	background-image:url("../img/pic14.jpg");
+	background-repeat: no-repeat;
+	background-size: 1290px 580px;
+}
+
+#logo {
+	font-size:40px;
+	color:#bdf272;
+	float:right;
+}
+
+
+
+
+#hd	{
+	font-size:40px;	
+	color:#0f5991;
+	font:bold;
+}
+
+
+#svp {
+	margin-top:-50px;
+	margin-left:320px;
+}
+
+#ufm {
+	margin-left:320px;
+}
+
+
+#dfm1 {
+	margin-left:320px;
+}
+
+
+#dfm2 {
+	margin-left:320px;
+}
+
+
+
+
+

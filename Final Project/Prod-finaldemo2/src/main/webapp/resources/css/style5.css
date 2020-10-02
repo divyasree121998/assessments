@@ -1,0 +1,50 @@
+
+
+body {
+	background-image:url("../img/pic10.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+
+#hd {
+	color:#6de1f7;
+	font-size:40px;
+}
+
+
+#sb {
+	float: right;
+	margin-right:-355px;
+	margin-top: 220px;
+}
+
+
+#tbl
+{
+	color:white;
+}
+
+#trh
+{
+	font-size:35px;
+	color:white;
+}
+
+
+#trd
+{
+	font-size:20px;
+	color:white;
+}
+
+
+#bck {
+	float:right;
+	margin-right:100px;
+	cursor:pointer;
+	margin-top:-100px;
+}
+
+
+

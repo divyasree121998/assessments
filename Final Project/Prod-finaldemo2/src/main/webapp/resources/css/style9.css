@@ -1,0 +1,32 @@
+
+
+body {
+	background-image:url("../img/pic7.jpg");
+	background-repeat: no-repeat;
+	background-size: 1290px 580px;
+}
+
+#logo {
+	font-size:40px;
+	color:#bdf272;
+}
+
+
+
+
+#hd	{
+	font-size:40px;	
+	margin-left:70px;
+	color:green;
+}
+
+#tblad {
+	margin-left:70px;
+	color:green;
+	font-size:20px;
+}
+
+
+
+
+

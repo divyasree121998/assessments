@@ -1,0 +1,29 @@
+
+
+body {
+	background-image:url("../img/cvr.jpg");
+	background-repeat: no-repeat;
+	background-size: 1290px 580px;
+}
+
+
+
+
+
+
+#hd	{
+	font-size:40px;	
+	margin-left:70px;
+	color:white;
+}
+
+#tblad {
+	margin-left:70px;
+	color:green;
+	font-size:20px;
+}
+
+
+
+
+
